@@ -2,7 +2,7 @@
 FROM maven:3.8.6-openjdk-22 as build
 
 # 设置工作目录
-WORKDIR /app
+WORKDIR /System
 
 # 将pom.xml和源代码复制到容器中
 COPY pom.xml .
