@@ -1,5 +1,5 @@
-# 第一阶段：使用 Maven 镜像进行构建  
-FROM maven:3.8.6-openjdk-22 AS build  
+# 第一阶段：使用适当的 Maven 镜像进行构建  
+FROM maven:3.8.6-openjdk-17 AS build  
 
 # 设置工作目录  
 WORKDIR /app  
@@ -13,8 +13,8 @@ COPY System/src ./src
 # 下载依赖并构建项目  
 RUN mvn clean package -DskipTests  
 
-# 第二阶段：使用 OpenJDK 作为运行时  
-FROM openjdk:22  
+# 第二阶段：使用 OpenJDK 运行时  
+FROM openjdk:17  
 
 # 设置工作目录  
 WORKDIR /app  
