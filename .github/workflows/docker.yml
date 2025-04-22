@@ -1,24 +1,24 @@
-# 使用 Maven 镜像作为基础镜像来进行构建，之后再切换到 OpenJDK 运行时镜像
-FROM maven:3.8.6-openjdk-22 as build
+# 使用 Maven 镜像作为基础镜像来进行构建  
+FROM maven:3.8.6-openjdk-22 as build  
 
-# 设置工作目录
+# 设置工作目录  
 WORKDIR /System
 
-# 将pom.xml和源代码复制到容器中
-COPY pom.xml .
-COPY src ./src
+# 将 pom.xml 和源代码复制到容器中  
+COPY pom.xml .  
+COPY src ./src  
 
-# 下载依赖并构建项目
-RUN mvn clean install -DskipTests
+# 下载依赖并构建项目  
+RUN mvn clean install -DskipTests  
 
-# 第二阶段：从OpenJDK 22镜像开始，用于运行构建后的应用
-FROM openjdk:22
+# 第二阶段：从 OpenJDK 22 镜像开始，用于运行构建后的应用  
+FROM openjdk:22  
 
-# 设置工作目录
-WORKDIR /app
+# 设置工作目录  
+WORKDIR /app  
 
-# 从上一阶段复制构建好的JAR文件到当前镜像
-COPY --from=build /app/target/service.doctor.tcm-0.0.1-SNAPSHOT.jar app.jar
+# 从上一阶段复制构建好的 JAR 文件到当前镜像  
+COPY --from=build /app/target/service.doctor.tcm-0.0.1-SNAPSHOT.jar app.jar  
 
-# 设置容器启动时运行的命令
-CMD ["java", "-jar", "app.jar"]
+# 设置容器启动时运行的命令  
+CMD ["java", "-jar", "app.jar"]  
