@@ -1,5 +1,5 @@
 # 第一阶段：使用适当的 Maven 镜像进行构建  
-FROM maven
+FROM maven as build
 
 # 设置工作目录  
 WORKDIR /app  
@@ -23,4 +23,4 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar  
 
 # 设置容器启动时运行的命令  
-CMD ["java", "-jar", "app.jar"]  
+CMD ["java", "-jar", "app.jar"]
