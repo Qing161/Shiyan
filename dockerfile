@@ -1,5 +1,5 @@
 # 第一阶段：使用适当的 Maven 镜像进行构建  
-FROM maven:3.8.6-openjdk-17 AS build  
+FROM maven
 
 # 设置工作目录  
 WORKDIR /app  
